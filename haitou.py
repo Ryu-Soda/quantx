@@ -43,13 +43,13 @@ def initialize(ctx):
       #PER = cp / eps　　　#PER = 株価÷一株当たり純利益
       #DIVP = eps * dp /cp  #配当利回り＝配当性向＊一株当たり純利益÷株価
 
-      for(sym,val) in cp.items():
+      #for(sym,val) in cp.items():
         #PER[sym] = cp[sym]/EPS[sym]
         #div[sym] = EPS[sym]*dp[sym]
         #divp[sym] = div[sym]/cp[sym]
         #divp5[sym] = ta.SMA(divp[sym].values.astype(np.double) , timeperiod=5)
         #divp5p[sym] = divp5[sym].shift()
-     return {
+      return {
         #"per0":per0,
         #"EPS":EPS,
         #"PER":PER,
