@@ -39,9 +39,8 @@ def initialize(ctx):
       #divp5p = pd.DataFrame(data=0,columns=[], index=cp.index)  #一日前の配当利回りの五日平均
       #PER = pd.DataFrame(data=0,columns=[], index=cp.index)
  
-        
-      #PER = cp / eps　　　#PER = 株価÷一株当たり純利益
-      #DIVP = eps * dp /cp  #配当利回り＝配当性向＊一株当たり純利益÷株価
+      #PER = 株価÷一株当たり純利益
+      #配当利回り＝配当性向＊一株当たり純利益÷株価
 
       #for(sym,val) in cp.items():
         #PER[sym] = cp[sym]/EPS[sym]
