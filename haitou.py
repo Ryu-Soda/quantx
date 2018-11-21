@@ -3,10 +3,10 @@ import pandas as pd
 import talib as ta
 
 def initialize(ctx):
-    # İ’è
+    # è¨­å®š
     ctx.logger.debug("initialize() called")
     ctx.configure(
-      channels={          # —˜—pƒ`ƒƒƒ“ƒlƒ‹
+      channels={          # åˆ©ç”¨ãƒãƒ£ãƒ³ãƒãƒ«
         "jp.stock": {
           "symbols": [
             "jp.stock.2768",
@@ -20,81 +20,81 @@ def initialize(ctx):
             "per",                # PER
             "pbr",                # PBR
             "eps",                # EPS
-            "net_sales",          #”„ã
-            "divident_payout"     #”z“–«Œü
+            "net_sales",          #å£²ä¸Š
+            "divident_payout"     #é…å½“æ€§å‘
             ]
           }
       }
     )
 
-    def _my_signal(data): #ƒVƒOƒiƒ‹ì¬‚É•K—v‚Èƒf[ƒ^‚ğì¬‚·‚é
-      #g‚¢‚½‚¢ƒf[ƒ^‚Ìƒf[ƒ^ƒtƒŒ[ƒ€‚ğì¬
-      cp = data["close_price_adj"].fillna(method="ffill")     #I’l
-      EPS = data["eps"].fillna(method="ffill")
-      per0 = data["per"].fillna(method="ffill")                 #[]“à‚Æ“¯‚¶–¼‘O‚ğ•t‚¯‚é‚ÆƒGƒ‰[‚ªo‚é
-      dp = data["divident_payout"].fillna(method="ffill")       #”z“–«Œü
-      div = pd.DataFrame(data=0,columns=[], index=cp.index)     #”z“–‹à
-      divp = pd.DataFrame(data=0,columns=[], index=cp.index)    #”z“–—˜‰ñ‚è
-      divp5 = pd.DataFrame(data=0,columns=[], index=cp.index)   #”z“–—˜‰ñ‚è‚ÌŒÜ“ú•½‹Ï
-      divp5p = pd.DataFrame(data=0,columns=[], index=cp.index)  #ˆê“ú‘O‚Ì”z“–—˜‰ñ‚è‚ÌŒÜ“ú•½‹Ï
-      PER = pd.DataFrame(data=0,columns=[], index=cp.index)
+    def _my_signal(data): #ã‚·ã‚°ãƒŠãƒ«ä½œæˆã«å¿…è¦ãªãƒ‡ãƒ¼ã‚¿ã‚’ä½œæˆã™ã‚‹
+      #ä½¿ã„ãŸã„ãƒ‡ãƒ¼ã‚¿ã®ãƒ‡ãƒ¼ã‚¿ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ä½œæˆ
+      #cp = data["close_price_adj"].fillna(method="ffill")     #çµ‚å€¤
+      #EPS = data["eps"].fillna(method="ffill")
+      #per0 = data["per"].fillna(method="ffill")                 #[]å†…ã¨åŒã˜åå‰ã‚’ä»˜ã‘ã‚‹ã¨ã‚¨ãƒ©ãƒ¼ãŒå‡ºã‚‹
+      #dp = data["divident_payout"].fillna(method="ffill")       #é…å½“æ€§å‘
+      #div = pd.DataFrame(data=0,columns=[], index=cp.index)     #é…å½“é‡‘
+      #divp = pd.DataFrame(data=0,columns=[], index=cp.index)    #é…å½“åˆ©å›ã‚Š
+      #divp5 = pd.DataFrame(data=0,columns=[], index=cp.index)   #é…å½“åˆ©å›ã‚Šã®äº”æ—¥å¹³å‡
+      #divp5p = pd.DataFrame(data=0,columns=[], index=cp.index)  #ä¸€æ—¥å‰ã®é…å½“åˆ©å›ã‚Šã®äº”æ—¥å¹³å‡
+      #PER = pd.DataFrame(data=0,columns=[], index=cp.index)
  
         
-      #PER = cp / eps@@@#PER = Š”‰¿€ˆêŠ”“–‚½‚èƒ—˜‰v
-      #DIVP = eps * dp /cp  #”z“–—˜‰ñ‚è”z“–«Œü–ˆêŠ”“–‚½‚èƒ—˜‰v€Š”‰¿
+      #PER = cp / epsã€€ã€€ã€€#PER = æ ªä¾¡Ã·ä¸€æ ªå½“ãŸã‚Šç´”åˆ©ç›Š
+      #DIVP = eps * dp /cp  #é…å½“åˆ©å›ã‚Šï¼é…å½“æ€§å‘ï¼Šä¸€æ ªå½“ãŸã‚Šç´”åˆ©ç›ŠÃ·æ ªä¾¡
 
       for(sym,val) in cp.items():
-        PER[sym] = cp[sym]/EPS[sym]
-        div[sym] = EPS[sym]*dp[sym]
-        divp[sym] = div[sym]/cp[sym]
-        divp5[sym] = ta.SMA(divp[sym].values.astype(np.double) , timeperiod=5)
-        divp5p[sym] = divp5[sym].shift()
+        #PER[sym] = cp[sym]/EPS[sym]
+        #div[sym] = EPS[sym]*dp[sym]
+        #divp[sym] = div[sym]/cp[sym]
+        #divp5[sym] = ta.SMA(divp[sym].values.astype(np.double) , timeperiod=5)
+        #divp5p[sym] = divp5[sym].shift()
       return {
-        "per0":per0,
-        "EPS":EPS,
-        "PER":PER,
-        "div":div,
-        "divp":divp,
-        "divp5":divp5,
-        "divp5p":divp5p,
-        "dp":dp,
+        #"per0":per0,
+        #"EPS":EPS,
+        #"PER":PER,
+        #"div":div,
+        #"divp":divp,
+        #"divp5":divp5,
+        #"divp5p":divp5p,
+        #"dp":dp,
         
       }
 
-    # ƒVƒOƒiƒ‹“o˜^
+    # ã‚·ã‚°ãƒŠãƒ«ç™»éŒ²
     ctx.regist_signal("my_signal", _my_signal)
 
-def handle_signals(ctx, date, current): #ƒVƒOƒiƒ‹‚ğì¬‚·‚é
+def handle_signals(ctx, date, current): #ã‚·ã‚°ãƒŠãƒ«ã‚’ä½œæˆã™ã‚‹
     '''
     current: pd.DataFrame
     
     
     '''
-    done_syms = set([])
-    divp5 = current["divp5"].dropna()
-    divp5p = current["divp5p"].dropna()
+    #done_syms = set([])
+    #divp5 = current["divp5"].dropna()
+    #divp5p = current["divp5p"].dropna()
     
-    buy_sig = divp5[(divp5>4.5) & (divp5p<4.5)] #
-    sell_sig = divp5[divp5<3]
+    #buy_sig = divp5[(divp5>4.5) & (divp5p<4.5)] #
+    #sell_sig = divp5[divp5<3]
     
-    for (sym,val) in buy_sig.items():
-      sec = ctx.getSecurity(sym)
-      sec.order(sec.unit() * 1, comment="SIGNAL BUY")
+    #for (sym,val) in buy_sig.items():
+      #sec = ctx.getSecurity(sym)
+      #sec.order(sec.unit() * 1, comment="SIGNAL BUY")
   
-    for (sym,val) in sell_sig.items():
-      sec = ctx.getSecurity(sym)
-      sec.order_target_percent(0, comment="SIGNAL SELL")
+    #for (sym,val) in sell_sig.items():
+      #sec = ctx.getSecurity(sym)
+      #sec.order_target_percent(0, comment="SIGNAL SELL")
 
     #done_syms = set([])
     #for (sym,val) in ctx.portfolio.positions.items():
     #    returns = val["returns"]
     #    if returns < -0.03:
     #      sec = ctx.getSecurity(sym)
-    #      sec.order(-val["amount"], comment="‘¹Ø‚è: %f" % returns)
+    #      sec.order(-val["amount"], comment="æåˆ‡ã‚Š: %f" % returns)
     #      done_syms.add(sym)
     #    elif returns > 0.05:
     #      sec = ctx.getSecurity(sym)
-    #      sec.order(-val["amount"], comment="‘¹‰vŠm’è”„: %f" % returns)
+    #      sec.order(-val["amount"], comment="æç›Šç¢ºå®šå£²: %f" % returns)
     #      done_syms.add(sym)
 
     #buy = current["buy:sig"].dropna()
