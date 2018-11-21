@@ -21,7 +21,9 @@ def initialize(ctx):
             "pbr",                # PBR
             "eps",                # EPS
             "net_sales",          #売上
-            "divident_payout"     #配当性向
+            "divident_payout",    #配当性向
+            "close_price_adj"     #終値
+             
             ]
           }
       }
