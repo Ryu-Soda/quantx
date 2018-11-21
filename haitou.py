@@ -49,7 +49,7 @@ def initialize(ctx):
         #divp[sym] = div[sym]/cp[sym]
         #divp5[sym] = ta.SMA(divp[sym].values.astype(np.double) , timeperiod=5)
         #divp5p[sym] = divp5[sym].shift()
-      return {
+     return {
         #"per0":per0,
         #"EPS":EPS,
         #"PER":PER,
